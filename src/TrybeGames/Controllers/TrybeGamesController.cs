@@ -117,7 +117,7 @@ public class TrybeGamesController
     public void AddPlayer()
     {
      string name = Console.ReadLine();
-     int increment = database.Players.Count();
+     int increment = database.Players.Count;
      var NewPlayes = new Player();
      NewPlayes.Id = increment + 1;
      NewPlayes.Name = name;
@@ -129,7 +129,7 @@ public class TrybeGamesController
     {
         // implementar
         string name = Console.ReadLine();
-        int increment = database.GameStudios.Count();
+        int increment = database.GameStudios.Count;
 
         var NewGameStudio = new GameStudio();
         NewGameStudio.Id = increment + 1;
