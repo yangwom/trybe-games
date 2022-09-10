@@ -76,10 +76,11 @@ public class TestTrybeGamesController
         var controller = new TrybeGamesController(database, mockConsole.Object);
 
         // Arrange
-
+        
         // Act
-
+          controller.AddGame();
         // Assert
+        controller.database.Games[0].Should().BeEquivalentTo(expected);
     }
 
     public static TheoryData<string, string, string, Game> DataTestTestAddGame => new TheoryData<string, string, string, Game>
