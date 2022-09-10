@@ -116,22 +116,45 @@ public class TrybeGamesController
 
     public void AddPlayer()
     {
-        // implementar
-        Console.WriteLine("Ainda não é possível realizar essa funcionalidade!");
+     string name = Console.ReadLine();
+     int increment = database.Players.Count();
+     var NewPlayes = new Player();
+     NewPlayes.Id = increment + 1;
+     NewPlayes.Name = name;
+     database.Players.Add(NewPlayes);
+      
     }
 
     public void AddGameStudio()
     {
         // implementar
-        Console.WriteLine("Ainda não é possível realizar essa funcionalidade!");
+        string name = Console.ReadLine();
+        int increment = database.GameStudios.Count();
+
+        var NewGameStudio = new GameStudio();
+        NewGameStudio.Id = increment + 1;
+        NewGameStudio.Name = name;
+        database.GameStudios.Add(NewGameStudio);
+
     }
 
     public void AddGame()
     {
-        // implementar
-        Console.WriteLine("Ainda não é possível realizar essa funcionalidade!");
+        // reference abner
+        Console.WriteLine("Digite o nome do jogo: ");
+        var gameName = Console.ReadLine();
+        Console.WriteLine("Digite o tipo do jogo: ");
+        var gameType = Console.ReadLine();
+        Console.WriteLine("Digite a data de lançamento do jogo: ");
+        var releaseDateGame = Console.ReadLine();
+        database.Games.Add(
+            new Game() {
+                Name = gameName,
+                Id = database.Players.Count() + 1,
+                ReleaseDate = DateTime.Parse(releaseDateGame),
+                GameType = (GameType)Enum.Parse(typeof(GameType), gameType),
+    });
     }
-
     public void ChangeGameStudio(Game game)
     {
         var gameStudio = SelectGameStudio(database.GameStudios);

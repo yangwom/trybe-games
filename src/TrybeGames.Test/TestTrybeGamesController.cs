@@ -40,13 +40,17 @@ public class TestTrybeGamesController
     [MemberData(nameof(DataTestTestAddGameStudio))]
     public void TestTestAddGameStudio(string name, GameStudio expected)
     {
-        throw new NotImplementedException();
+
 
         // Arrange
-
+        var mockConsole = new Mock<IConsole>();
+        mockConsole.Setup(c => c.ReadLine()).Returns(name);
+        var database = new TrybeGamesDatabase();
+        var controller = new TrybeGamesController(database, mockConsole.Object);
         // Act
-
+        controller.AddGameStudio();
         // Assert
+        controller.database.Players[0].Should().BeEquivalentTo(expected);
     }
 
     public static TheoryData<string, GameStudio> DataTestTestAddGameStudio => new TheoryData<string, GameStudio>
@@ -61,13 +65,19 @@ public class TestTrybeGamesController
     [MemberData(nameof(DataTestTestAddGame))]
     public void TestTestAddGame(string name, string date, string gameType, Game expected)
     {
-        throw new NotImplementedException();
+          var mockConsole = new Mock<IConsole>();
 
-        // Arrange
+        // Mocando função .ReadLine do console para retornar o nome do game studio
+        mockConsole.SetupSequence(c => c.ReadLine())
+            .Returns(name)
+            .Returns(gameType)
+            .Returns(date);
+        var database = new TrybeGamesDatabase();
+        var controller = new TrybeGamesController(database, mockConsole.Object);
+        controller.AddGame();
 
-        // Act
-
-        // Assert
+        controller.database.Games[0].Should().BeEquivalentTo(expected);
+      
     }
 
     public static TheoryData<string, string, string, Game> DataTestTestAddGame => new TheoryData<string, string, string, Game>
