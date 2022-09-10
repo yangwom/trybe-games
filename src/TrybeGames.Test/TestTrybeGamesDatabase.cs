@@ -13,16 +13,19 @@ public class TestTrybeGamesDatabase
     [MemberData(nameof(DataTestGetGamesPlayedBy))]
     public void TestGetGamesPlayedBy(TrybeGamesDatabase databaseEntry, int playerIdEntry, List<Game> expected)
     {
-        throw new NotImplementedException();
 
         // Arrange
-        
-        // Act
-        
+         var dataplayer = from player in databaseEntry.Players
+         where player.Id == playerIdEntry
+         select player;
+        //act
+         var result = databaseEntry.GetGamesPlayedBy(dataplayer.ToList()[0]);
+
+         result.Should().BeEquivalentTo(expected);
         // Assert
     }
 
-    public static TheoryData<TrybeGamesDatabase, int, List<Game>> DataTestGetGamesPlayedBy => new TheoryData<TrybeGamesDatabase, int, List<Game>>
+    public static TheoryData<TrybeGamesDatabase, int, List<Game>> DataTestGetGamesPlayedBy => new()
     {
         {
             new TrybeGamesDatabase
@@ -73,12 +76,17 @@ public class TestTrybeGamesDatabase
     [MemberData(nameof(DataTestGetGamesOwnedBy))]
     public void TestGetGamesOwnedBy(TrybeGamesDatabase databaseEntry, int playerIdEntry, List<Game> expected)
     {
-        throw new NotImplementedException();
+        var dataGamesOwnedBy = from player in databaseEntry.Players
+        where player.Id == playerIdEntry
+        select player;
 
+        var result = databaseEntry.GetGamesOwnedBy(dataGamesOwnedBy.ToList()[0]);
+          
+        result.Should().BeEquivalentTo(expected);
         // Arrange
-        
+    
         // Act
-        
+
         // Assert
     }
 
@@ -133,13 +141,15 @@ public class TestTrybeGamesDatabase
     [MemberData(nameof(DataTestGetGamesDevelopedBy))]
     public void TestGetGamesDevelopedBy(TrybeGamesDatabase databaseEntry, int gameStudioIdEntry, List<Game> expected)
     {
-        throw new NotImplementedException();
+        var ListStudio = from studio in databaseEntry.GameStudios
+                         where studio.Id == gameStudioIdEntry
+                         select studio;
 
-        // Arrange
-        
-        // Act
-        
-        // Assert
+       var result = databaseEntry.GetGamesDevelopedBy(ListStudio.ToList()[0]);
+
+        result.Should().BeEquivalentTo(expected);
+
+
     }
 
     public static TheoryData<TrybeGamesDatabase, int, List<Game>> DataTestGetGamesDevelopedBy => new TheoryData<TrybeGamesDatabase, int, List<Game>>

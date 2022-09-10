@@ -11,18 +11,30 @@ public class TrybeGamesDatabase
     public List<Game> GetGamesDevelopedBy(GameStudio gameStudio)
     {
         // implementar
-        throw new NotImplementedException();
+        var ListGames = from game in Games
+        where game.DeveloperStudio == gameStudio.Id
+        select game;
+
+        return ListGames.ToList();
     }
 
     public List<Game> GetGamesPlayedBy(Player player)
     {
         // Implementar
-        throw new NotImplementedException();
+        var ListPlayer = from game in Games
+        where game.Players.Contains(player.Id)
+        select game;
+
+        return ListPlayer.ToList();
     }
 
     public List<Game> GetGamesOwnedBy(Player playerEntry)
     {
         // Implementar
-        throw new NotImplementedException();
+        var result = from game in Games
+        where playerEntry.GamesOwned.Contains(game.Id)
+        select game;
+
+        return result.ToList();
     }
 }
