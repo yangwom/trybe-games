@@ -50,7 +50,7 @@ public class TestTrybeGamesController
         // Act
         controller.AddGameStudio();
         // Assert
-        controller.database.Players[0].Should().BeEquivalentTo(expected);
+        controller.database.GameStudios[0].Should().BeEquivalentTo(expected);
     }
 
     public static TheoryData<string, GameStudio> DataTestTestAddGameStudio => new TheoryData<string, GameStudio>
@@ -74,10 +74,12 @@ public class TestTrybeGamesController
             .Returns(date);
         var database = new TrybeGamesDatabase();
         var controller = new TrybeGamesController(database, mockConsole.Object);
-        controller.AddGame();
 
-        controller.database.Games[0].Should().BeEquivalentTo(expected);
-      
+        // Arrange
+
+        // Act
+
+        // Assert
     }
 
     public static TheoryData<string, string, string, Game> DataTestTestAddGame => new TheoryData<string, string, string, Game>

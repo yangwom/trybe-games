@@ -130,7 +130,7 @@ public class TrybeGamesController
         // implementar
         string name = Console.ReadLine();
         int increment = database.GameStudios.Count;
-
+         
         var NewGameStudio = new GameStudio();
         NewGameStudio.Id = increment + 1;
         NewGameStudio.Name = name;
